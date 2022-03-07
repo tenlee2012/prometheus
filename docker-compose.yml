@@ -11,7 +11,7 @@ networks:
 services:
 
   prometheus:
-    image: prom/prometheus:v2.1.0
+    image: prom/prometheus:v2.33.4
     volumes:
       - ./prometheus/:/etc/prometheus/
       - prometheus_data:/prometheus
@@ -53,8 +53,6 @@ services:
     networks:
       - back-tier
     restart: always
-    deploy:
-      mode: global
 
   alertmanager:
     image: prom/alertmanager
@@ -73,7 +71,7 @@ services:
 #        constraints:
 #          - node.hostname == ${HOSTNAME}
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor
+    image: google/cadvisor
     volumes:
       - /:/rootfs:ro
       - /var/run:/var/run:rw
@@ -84,8 +82,6 @@ services:
     networks:
       - back-tier
     restart: always
-    deploy:
-      mode: global
 
   grafana:
     image: grafana/grafana
